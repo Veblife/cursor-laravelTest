@@ -12,6 +12,8 @@ services:
       - ./:/var/www
     networks:
       - laravel-network
+    security_opt:
+      - no-new-privileges:true
 
   nginx:
     image: nginx:alpine
@@ -24,24 +26,28 @@ services:
       - ./docker/nginx/conf.d:/etc/nginx/conf.d/
     networks:
       - laravel-network
+    security_opt:
+      - no-new-privileges:true
 
   db:
     image: mysql:8.0
     container_name: laravel-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: laravel
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_PASSWORD: root
-      MYSQL_USER: laravel
+      MYSQL_DATABASE: "${DB_DATABASE:-laravel}"
+      MYSQL_ROOT_PASSWORD: "${DB_ROOT_PASSWORD}"
+      MYSQL_PASSWORD: "${DB_PASSWORD}"
+      MYSQL_USER: "${DB_USERNAME:-laravel}"
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     ports:
-      - "3306:3306"
+      - "127.0.0.1:3306:3306"
     volumes:
       - dbdata:/var/lib/mysql
     networks:
       - laravel-network
+    security_opt:
+      - no-new-privileges:true
 
 networks:
   laravel-network:

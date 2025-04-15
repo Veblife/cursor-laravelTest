@@ -8,7 +8,9 @@ RUN apt-get update && apt-get install -y \
     libonig-dev \
     libxml2-dev \
     zip \
-    unzip
+    unzip \
+    nodejs \
+    npm
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -24,6 +26,9 @@ WORKDIR /var/www
 
 # Copy existing application directory
 COPY . .
+
+# Install Node.js dependencies and build assets
+RUN npm install && npm run build
 
 # Change current user to www-data
 USER www-data
