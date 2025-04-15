@@ -64,3 +64,171 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Laravel Admin Panel Project
+
+This project is a Laravel-based web application with an admin panel, built using Docker for containerization.
+
+## Prerequisites
+
+- Docker and Docker Compose
+- Git
+- Composer (for local development)
+- Node.js and npm (for local development)
+
+## Project Setup
+
+1. Clone the repository:
+```bash
+git clone <repository-url>
+cd <project-directory>
+```
+
+2. Create Docker environment files:
+```bash
+cp .env.example .env
+```
+
+3. Build and start Docker containers:
+```bash
+docker compose up -d
+```
+
+4. Install PHP dependencies:
+```bash
+docker compose exec app composer install
+```
+
+5. Generate application key:
+```bash
+docker compose exec app php artisan key:generate
+```
+
+6. Run database migrations:
+```bash
+docker compose exec app php artisan migrate
+```
+
+7. Create admin user:
+```bash
+docker compose exec app php artisan db:seed
+```
+
+8. Install and build frontend assets:
+```bash
+docker compose exec app npm install
+docker compose exec app npm run build
+```
+
+## Project Structure
+
+### Admin Panel Features
+
+- User Authentication (Laravel Breeze)
+- Admin Dashboard
+- Category Management
+- Post Management
+- User Management
+- Role-based Access Control
+
+### Key Components
+
+- **Controllers**
+  - `AdminController`: Handles admin dashboard
+  - `CategoryController`: Manages categories
+  - `PostController`: Manages posts
+  - `ProfileController`: Handles user profiles
+
+- **Models**
+  - `User`: User model with admin role
+  - `Category`: Category model
+  - `Post`: Post model
+
+- **Middleware**
+  - `AdminMiddleware`: Protects admin routes
+
+- **Views**
+  - Admin dashboard
+  - Authentication views
+  - Category management
+  - Post management
+  - User profile
+
+## Development
+
+### Running the Application
+
+The application is accessible at:
+- Main application: http://localhost:8000
+- Admin dashboard: http://localhost:8000/admin/dashboard
+
+### Default Admin Credentials
+
+- Email: admin@example.com
+- Password: password
+
+### Common Commands
+
+```bash
+# Start containers
+docker compose up -d
+
+# Stop containers
+docker compose down
+
+# Run migrations
+docker compose exec app php artisan migrate
+
+# Create new migration
+docker compose exec app php artisan make:migration create_table_name_table
+
+# Run seeders
+docker compose exec app php artisan db:seed
+
+# Clear cache
+docker compose exec app php artisan cache:clear
+
+# Generate new model
+docker compose exec app php artisan make:model ModelName
+
+# Generate new controller
+docker compose exec app php artisan make:controller ControllerName
+```
+
+## Testing
+
+Run tests using:
+```bash
+docker compose exec app php artisan test
+```
+
+## Deployment
+
+1. Set up production environment variables
+2. Build and optimize the application:
+```bash
+docker compose exec app php artisan optimize
+docker compose exec app npm run build
+```
+
+3. Deploy using your preferred hosting platform
+
+## Security
+
+- All sensitive data is stored in environment variables
+- Admin routes are protected by middleware
+- CSRF protection is enabled
+- Password hashing is implemented
+- Input validation is in place
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+## License
+
+This project is licensed under the MIT license.
