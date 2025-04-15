@@ -21,3 +21,29 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# Composer cache
+/.composer/cache/
+/.composer/cache/*
+/.composer/cache/**/*
+
+# NPM cache
+/.npm/
+/.npm/*
+/.npm/**/*
+
+# Laravel cache
+/bootstrap/cache/
+/bootstrap/cache/*
+/bootstrap/cache/**/*
+
+# IDE cache
+/.idea/
+/.vscode/
+/.fleet/
+/.nova/
+/.zed/
+
+# OS cache
+.DS_Store
+Thumbs.db
